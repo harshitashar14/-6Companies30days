@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void helper(int sum,int inc,int k,int n,int i,vector<vector<int>> &ans,vector<int> &temp){
+        
+        if(inc==k)
+        {
+            if(sum==n)
+            {
+                
+                ans.push_back(temp);
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
+        if(i==10)
+        return;
+        helper(sum,inc,k,n,i+1,ans,temp);
+        if(i+sum<=n)
+        {
+            temp.push_back(i);
+            helper(sum+i,inc+1,k,n,i+1,ans,temp);
+            temp.pop_back();
+        }
+        
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int> temp;
+        vector<vector<int>> ans;
+        helper(0,0,k,n,1,ans,temp);
+        return ans;
+        
+    }
+};
