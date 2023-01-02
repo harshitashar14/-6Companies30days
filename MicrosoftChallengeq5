@@ -1,0 +1,36 @@
+class Solution {
+public:
+    
+    vector<int> largestDivisibleSubset(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        unordered_map<int,vector<int>> m;
+        unordered_map<int,int> m_2;
+        int ans = -1;
+        int n = nums.size();
+        for(int i=0;i<n;i++)
+        {
+            int temp = -1;
+            for(int j=0;j<i;j++)
+            {
+                if(nums[i]%nums[j]==0)
+                {
+                    if(temp==-1 || m_2[j]>m_2[temp])
+                    {
+                        temp = j;
+                    }
+                }
+                
+            }
+                m_2[i] = m_2[temp] + 1;
+                vector<int> v = m[temp];
+                v.push_back(nums[i]);
+                m[i] = v;
+                if(m_2[i]>m_2[ans])
+                {
+                    ans = i;
+                }
+        }
+        return m[ans];
+        
+    }
+};
